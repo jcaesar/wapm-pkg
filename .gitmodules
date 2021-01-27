@@ -1,0 +1,6 @@
+[submodule "dust/src"]
+	path = dust/src
+	url = https://github.com/jcaesar/dust
+[submodule "dust-wasi/src"]
+	path = dust-wasi/src
+	url = https://github.com/jcaesar/dust
