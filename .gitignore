@@ -1,2 +1,4 @@
 */target
 cache
+wapm_packages
+*/pack/*.wasm
