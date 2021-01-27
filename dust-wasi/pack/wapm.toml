@@ -1,0 +1,18 @@
+[package]
+name = "liftm/dust-wasi"
+version = "0.5.4-2"
+description = "A more intuitive version of du"
+license = "Apache-2.0"
+repository = "https://github.com/jcaesar/wapm-pkg"
+
+[[module]]
+name = "dust"
+source = "dust.wasm"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "dust"
+module = "dust"
