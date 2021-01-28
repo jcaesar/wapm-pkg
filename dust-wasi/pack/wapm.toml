@@ -1,9 +1,11 @@
 [package]
 name = "liftm/dust-wasi"
-version = "0.5.4-2"
+version = "0.5.4-3"
 description = "A more intuitive version of du"
 license = "Apache-2.0"
 repository = "https://github.com/jcaesar/wapm-pkg"
+homepage = "https://github.com/bootandy/dust"
+readme = "README.md"
 
 [[module]]
 name = "dust"
