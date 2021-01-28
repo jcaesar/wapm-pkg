@@ -7,3 +7,6 @@
 [submodule "exa-wasi/src"]
 	path = exa-wasi/src
 	url = https://github.com/jcaesar/exa
+[submodule "rq/src"]
+	path = rq/src
+	url = https://github.com/jcaesar/rq
