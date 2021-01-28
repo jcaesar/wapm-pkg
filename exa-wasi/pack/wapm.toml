@@ -1,0 +1,20 @@
+[package]
+name = "liftm/exa-wasi"
+version = "0.9.0-1"
+description = "a modern replacement for ls"
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg"
+homepage = "https://github.com/ogham/exa"
+readme = "README.md"
+
+[[module]]
+name = "exa"
+source = "exa.wasm"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "exa"
+module = "exa"

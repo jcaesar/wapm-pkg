@@ -4,3 +4,6 @@
 [submodule "dust-wasi/src"]
 	path = dust-wasi/src
 	url = https://github.com/jcaesar/dust
+[submodule "exa-wasi/src"]
+	path = exa-wasi/src
+	url = https://github.com/jcaesar/exa
