@@ -32,18 +32,21 @@ if ! podman image list --format "{{.Repository}}" | grep -q $tag; then
 	podman build -t $tag - <<<"$df"
 fi
 
-target="$(realpath "${1?"No target folder parameter"}")"
+root="$(realpath "$(dirname "$0")")"
+target="$(realpath --relative-to="$root" "${1?"No target folder parameter"}")"
 
-mkdir -p "$target/target" cache
+mkdir -p "$root/$target/target" "$root/cache"
 
+#set -x
 podman run --rm -ti \
 	-e http_proxy="${podman_http_proxy:-${http_proxy:-}}" \
 	-e https_proxy="${podman_https_proxy:-${https_proxy:-}}" \
-	-v "$target/src:/root/src" \
-	-v "$target/target:/root/src/target" \
-	-v "$(realpath "$(dirname "$0")")/cache:/root/.cargo/registry" \
-	$tag cargo build -v --release --locked --target=wasm32-wasi
+	-w "/root/src/$target/src" \
+	-v "$root:/root/src:ro" \
+	-v "$root/$target/target:/root/src/$target/src/target" \
+	-v "$root/cache:/root/.cargo/registry" \
+	$tag cargo build --release --locked --target=wasm32-wasi
 	# Sad that this won't work: cargo +nightly build -Z build-std=core,std,alloc --release --locked --target=wasm32-wasi
 
-mkdir -p "$target/pack"
-cp  -t "$target/pack/" "$target"/target/wasm32-wasi/release/*.wasm
+mkdir -p "$root/$target/pack"
+cp  -t "$root/$target/pack/" "$root/$target"/target/wasm32-wasi/release/*.wasm
