@@ -35,7 +35,7 @@ fi
 root="$(realpath "$(dirname "$0")")"
 target="$(realpath --relative-to="$root" "${1?"No target folder parameter"}")"
 
-mkdir -p "$root/$target/target" "$root/cache"
+mkdir -p "$root/$target/target" "$root/$target/src/target" "$root/cache"
 
 #set -x
 podman run --rm -ti \

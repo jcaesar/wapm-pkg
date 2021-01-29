@@ -10,3 +10,9 @@
 [submodule "rq/src"]
 	path = rq/src
 	url = https://github.com/jcaesar/rq
+[submodule "starlark/sl-cmd"]
+	path = starlark/sl-cmd
+	url = https://github.com/jcaesar/sl-cmd
+[submodule "starlark/src"]
+	path = starlark/src
+	url = https://github.com/jcaesar/sl-cmd
