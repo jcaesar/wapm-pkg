@@ -16,3 +16,6 @@
 [submodule "starlark/src"]
 	path = starlark/src
 	url = https://github.com/jcaesar/sl-cmd
+[submodule "fd/src"]
+	path = fd/src
+	url = https://github.com/jcaesar/fd

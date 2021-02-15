@@ -1,0 +1,20 @@
+[package]
+name = "liftm/fd"
+version = "8.2.1-1"
+description = "fd is a simple, fast and user-friendly alternative to find."
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg"
+homepage = "https://github.com/bootandy/fd"
+readme = "README.md"
+
+[[module]]
+name = "fd"
+source = "fd.wasm"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "fd"
+module = "fd"
