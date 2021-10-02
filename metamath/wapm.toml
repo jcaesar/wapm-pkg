@@ -1,0 +1,16 @@
+[package]
+name = "liftm/metamath"
+version = "0.198.20210807-1"
+description = "A tiny language and checker for theorems and proofs in abstract mathematics"
+license = "GPL-2"
+repository = "https://github.com/jcaesar/wapm-pkg"
+homepage = "http://us.metamath.org/mm.html"
+
+[[module]]
+name = "metamath"
+source = "metamath.wasm"
+abi = "emscripten"
+
+[[command]]
+name = "metamath"
+module = "metamath"
