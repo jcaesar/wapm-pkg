@@ -18,22 +18,25 @@ USER frust
 WORKDIR  /work
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR /work/emsdk
-RUN ./emsdk install 1.38.43
-RUN ./emsdk activate 1.38.43
-ENV PATH="/work/emsdk:${PATH}"
+RUN ./emsdk install 2.0.31
+RUN ./emsdk activate 2.0.31
 ENV PATH="/work/emsdk/node/14.15.5_64bit/bin:${PATH}"
-ENV PATH="/work/emsdk/fastcomp/emscripten:${PATH}"
+ENV PATH="/work/emsdk/upstream/emscripten:${PATH}"
+ENV PATH="/work/emsdk:${PATH}"
 ENV EMSDK_NODE=/work/emsdk/node/14.15.5_64bit/bin/node
 ENV EMSDK=/work/emsdk
 ENV EM_CONFIG=/work/emsdk/.emscripten
 RUN echo 'int main() {}' >/tmp/dummy.c \
 	&& emcc /tmp/dummy.c -o /tmp/dummy.wasm
 WORKDIR /work
-RUN curl http://us.metamath.org/downloads/metamath.zip -o metamath.zip \
-        && echo 126fc3eac6699257cfcdbfb2087fb31284fdfe784bb9d6e2ea7c32b8524c3da9 \ metamath.zip | sha256sum -c \
-        && unzip metamath.zip -d . \
-        && rm metamath.zip
+RUN curl -sLS https://github.com/metamath/metamath-exe/archive/refs/tags/v0.198.tar.gz -o metamath.tgz \
+        && echo 7029880b754ee7e7e97b4c1b5e79910222c4f258d353e9b739dc413a4f35551f \ metamath.tgz | sha256sum -c \
+        && tar xvf metamath.tgz \
+        && rm metamath.tgz \
+	&& mv metamath-* metamath
 WORKDIR /work/metamath
-RUN emcc -O3 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy *.c -o metamath.wasm
+COPY api-reduce.patch .
+RUN patch -p1 <api-reduce.patch
+RUN emcc -O1 -g3 -s STANDALONE_WASM=1 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy *.c -o metamath.wasm
 #RUN ln -s . wapm-builtin
-#RUN emcc -O3 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy $(for f in wapm-builtin/*.mm; do echo --embed-file $f; done) *.c -o metamath.wasm
+#RUN emcc -O3 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy $(for f in $(find wapm-builtin/ -name *.mm); do echo --embed-file $f; done) *.c -o metamath.wasm

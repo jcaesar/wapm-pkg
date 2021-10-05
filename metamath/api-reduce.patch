@@ -1,0 +1,80 @@
+diff '--color=auto' -Naur metamath/metamath.c metamath-patch/metamath.c
+--- metamath/metamath.c	2021-10-05 10:33:45.649788019 +0900
++++ metamath-patch/metamath.c	2021-10-05 13:11:46.548591199 +0900
+@@ -1126,8 +1126,8 @@
+     /* (This is a command line that begins with a quote) */
+     if (g_commandLine[0] == '\'' || g_commandLine[0] == '\"') {
+       /* See if this computer has this feature */
+-      if (!system(NULL)) {
+-        print2("?This computer does not accept an operating system command.\n");
++      if (1) {
++        print2("?This metamath does not accept an operating system command.\n");
+         continue;
+       } else {
+         /* Strip off quote and trailing quote if any */
+@@ -1138,7 +1138,7 @@
+           }
+         }
+         /* Do the operating system command */
+-        (void)system(str1);
++        //(void)system(str1);
+ #ifdef VAXC
+         printf("\n"); /* Last line from VAX doesn't have new line */
+ #endif
+@@ -2785,10 +2785,11 @@
+       fclose(list2_fp);
+       if (tmpFlag) {
+         /* Recover input files in case of error */
+-        remove(g_fullArg[2]);  /* Delete output file */
+-        rename(cat(g_fullArg[2], "~1", NULL), g_fullArg[2]);
++        //remove(g_fullArg[2]);  /* Delete output file */
++        //rename(cat(g_fullArg[2], "~1", NULL), g_fullArg[2]);
+             /* Restore input file name */
+-        print2("?The file \"%s\" was not modified.\n", g_fullArg[2]);
++        //print2("?The file \"%s\" was not modified.\n", g_fullArg[2]);
++        print2("?Cannot recover \"%s\" from \"%s\" due to system limitations, leaving modified file.\n", g_fullArg[2], cat(g_fullArg[2], "~1", NULL));
+       }
+       continue;
+     }  /* End of "WRITE RECENT_ADDITIONS" */
+diff '--color=auto' -Naur metamath/mmcmdl.c metamath-patch/mmcmdl.c
+--- metamath/mmcmdl.c	2021-10-05 10:33:45.649788019 +0900
++++ metamath-patch/mmcmdl.c	2021-10-05 13:17:18.370610983 +0900
+@@ -1951,6 +1951,7 @@
+     if (cmdList[0] == '&') {
+       /* See if file exists */
+       let(&tmpStr, cat(g_rootDirectory, keyword, NULL)); /* 9-Jan-2018 nm */
++      print2("oepen %s", tmpStr);
+       tmpFp = fopen(tmpStr, "r");
+       if (!tmpFp) {
+         let(&tmpStr,  cat(
+diff '--color=auto' -Naur metamath/mminou.c metamath-patch/mminou.c
+--- metamath/mminou.c	2021-10-05 10:33:45.656454685 +0900
++++ metamath-patch/mminou.c	2021-10-05 13:11:35.441635586 +0900
+@@ -17,6 +17,19 @@
+ #include "mminou.h"
+ #include "mmcmdl.h" /* 9/3/99 - for g_commandPrompt global */
+ 
++#undef rename
++int rename(const char* oldFileName, const char* newFileName) {
++  print2("?Cannot rename \"%s\" -> \"%s\" on this system .\n", oldFileName, newFileName);
++  return 1;
++}
++#undef remove
++int remove(const char* fileName) {
++  print2("?Cannot remove \"%s\" on this system .\n", fileName);
++  return 1;
++}
++// If I'm already overriding function behavior: I don't need or want this one
++void emscripten_notify_memory_growth(size_t blubb) {}
++
+ #ifdef __WATCOMC__
+   /* Bugs in WATCOMC:
+      1. #include <conio.h> has compile errors
+@@ -1159,6 +1172,7 @@
+ /* 10-Aug-2019 nm Fixed problem w/ delete + noVersioningFlag */
+ FILE *fSafeOpen(vstring fileName, vstring mode, flag noVersioningFlag)
+ {
++	print2("fSafeOpen: %s %s %d", fileName, mode, noVersioningFlag);
+   FILE *fp;
+   vstring prefix = "";
+   vstring postfix = "";
