@@ -1,0 +1,100 @@
+diff '--color=auto' -Naur metamath/metamath.c metamath-patch/metamath.c
+--- metamath/metamath.c	2021-10-06 08:24:37.597021548 +0900
++++ metamath-patch/metamath.c	2021-10-06 08:29:23.463130240 +0900
+@@ -1126,8 +1126,8 @@
+     /* (This is a command line that begins with a quote) */
+     if (g_commandLine[0] == '\'' || g_commandLine[0] == '\"') {
+       /* See if this computer has this feature */
+-      if (!system(NULL)) {
+-        print2("?This computer does not accept an operating system command.\n");
++      if (1) {
++        print2("?This metamath does not accept an operating system command.\n");
+         continue;
+       } else {
+         /* Strip off quote and trailing quote if any */
+@@ -1138,7 +1138,7 @@
+           }
+         }
+         /* Do the operating system command */
+-        (void)system(str1);
++        //(void)system(str1);
+ #ifdef VAXC
+         printf("\n"); /* Last line from VAX doesn't have new line */
+ #endif
+diff '--color=auto' -Naur metamath/mmdata.c metamath-patch/mmdata.c
+--- metamath/mmdata.c	2021-10-06 08:24:37.600354937 +0900
++++ metamath-patch/mmdata.c	2021-10-06 08:25:21.637838744 +0900
+@@ -23,7 +23,6 @@
+ #include "mmwtex.h" /* Needed for SMALL_DECORATION etc. */
+ 
+ #include <limits.h>
+-#include <setjmp.h>
+ /*E*/long db=0,db0=0,db2=0,db3=0,db4=0,db5=0,db6=0,db7=0,db8=0,db9=0;
+ flag g_listMode = 0; /* 0 = metamath, 1 = list utility */
+ flag g_toolsMode = 0; /* In metamath: 0 = metamath, 1 = text tools utility */
+diff '--color=auto' -Naur metamath/mminou.c metamath-patch/mminou.c
+--- metamath/mminou.c	2021-10-06 08:24:37.603688326 +0900
++++ metamath-patch/mminou.c	2021-10-06 08:30:09.249691648 +0900
+@@ -10,7 +10,6 @@
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <stdarg.h>
+-#include <setjmp.h>
+ #include <time.h>  /* 16-Aug-2016 nm For ELAPSED_TIME */
+ #include "mmvstr.h"
+ #include "mmdata.h"
+diff '--color=auto' -Naur metamath/mmpars.c metamath-patch/mmpars.c
+--- metamath/mmpars.c	2021-10-06 08:24:37.603688326 +0900
++++ metamath-patch/mmpars.c	2021-10-06 08:25:21.641172145 +0900
+@@ -10,7 +10,6 @@
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <stdarg.h>
+-#include <setjmp.h>
+ #include "mmvstr.h"
+ #include "mmdata.h"
+ #include "mminou.h"
+diff '--color=auto' -Naur metamath/mmpfas.c metamath-patch/mmpfas.c
+--- metamath/mmpfas.c	2021-10-06 08:24:37.603688326 +0900
++++ metamath-patch/mmpfas.c	2021-10-06 08:25:21.641172145 +0900
+@@ -12,7 +12,6 @@
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <stdarg.h>
+-#include <setjmp.h>
+ #include <time.h>
+ #include "mmvstr.h"
+ #include "mmdata.h"
+diff '--color=auto' -Naur metamath/mmunif.c metamath-patch/mmunif.c
+--- metamath/mmunif.c	2021-10-06 08:24:37.603688326 +0900
++++ metamath-patch/mmunif.c	2021-10-06 08:25:21.644505545 +0900
+@@ -106,7 +106,6 @@
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <stdarg.h>
+-#include <setjmp.h>
+ #include <time.h>
+ #include "mmvstr.h"
+ #include "mmdata.h"
+diff '--color=auto' -Naur metamath/mmveri.c metamath-patch/mmveri.c
+--- metamath/mmveri.c	2021-10-06 08:24:37.603688326 +0900
++++ metamath-patch/mmveri.c	2021-10-06 08:25:21.644505545 +0900
+@@ -10,7 +10,6 @@
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <stdarg.h>
+-#include <setjmp.h>
+ #include "mmvstr.h"
+ #include "mmdata.h"
+ #include "mminou.h"
+diff '--color=auto' -Naur metamath/mmword.c metamath-patch/mmword.c
+--- metamath/mmword.c	2021-10-06 08:24:37.607021716 +0900
++++ metamath-patch/mmword.c	2021-10-06 08:25:21.644505545 +0900
+@@ -27,7 +27,6 @@
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <stdarg.h>
+-#include <setjmp.h>
+ #include "mmvstr.h"
+ #include "mmdata.h"
+ #include "mminou.h"

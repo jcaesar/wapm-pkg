@@ -5,3 +5,5 @@ podman build -t metamath-wasm-build .
 cont=$(podman create metamath-wasm-build)
 trap "podman rm $cont" EXIT
 podman cp $cont:/work/metamath/metamath.wasm .
+mkdir -p builtins
+podman cp $cont:/work/metamath/\*.mm builtins/

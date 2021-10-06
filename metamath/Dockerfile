@@ -16,27 +16,21 @@ RUN apt-get update && \
     useradd frust --user-group --create-home --home-dir /work --shell /bin/bash
 USER frust
 WORKDIR  /work
-RUN git clone https://github.com/emscripten-core/emsdk.git
-WORKDIR /work/emsdk
-RUN ./emsdk install 2.0.31
-RUN ./emsdk activate 2.0.31
-ENV PATH="/work/emsdk/node/14.15.5_64bit/bin:${PATH}"
-ENV PATH="/work/emsdk/upstream/emscripten:${PATH}"
-ENV PATH="/work/emsdk:${PATH}"
-ENV EMSDK_NODE=/work/emsdk/node/14.15.5_64bit/bin/node
-ENV EMSDK=/work/emsdk
-ENV EM_CONFIG=/work/emsdk/.emscripten
-RUN echo 'int main() {}' >/tmp/dummy.c \
-	&& emcc /tmp/dummy.c -o /tmp/dummy.wasm
-WORKDIR /work
+ENV WASI_VERSION=12
+ENV WASI_VERSION_FULL=${WASI_VERSION}.0
+ENV WASI_HASH=fa47694d75bf6fce98fbe7927193298b25ee03dade27fca453d7dd530378973a
+RUN curl -sLS https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-$WASI_VERSION/wasi-sdk-$WASI_VERSION_FULL-linux.tar.gz -o wasi-sdk.tgz \
+	&& echo $WASI_HASH \ wasi-sdk.tgz | sha256sum -c \
+	&& tar xvf wasi-sdk.tgz \
+	&& rm wasi-sdk.tgz
+ENV WASI_SDK_PATH=/work/wasi-sdk-${WASI_VERSION_FULL}
+ENV CC="${WASI_SDK_PATH}/bin/clang --sysroot=${WASI_SDK_PATH}/share/wasi-sysroot"
 RUN curl -sLS https://github.com/metamath/metamath-exe/archive/refs/tags/v0.198.tar.gz -o metamath.tgz \
         && echo 7029880b754ee7e7e97b4c1b5e79910222c4f258d353e9b739dc413a4f35551f \ metamath.tgz | sha256sum -c \
         && tar xvf metamath.tgz \
         && rm metamath.tgz \
 	&& mv metamath-* metamath
 WORKDIR /work/metamath
-COPY api-reduce.patch .
-RUN patch -p1 <api-reduce.patch
-RUN emcc -O1 -g3 -s STANDALONE_WASM=1 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy *.c -o metamath.wasm
-#RUN ln -s . wapm-builtin
-#RUN emcc -O3 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy $(for f in $(find wapm-builtin/ -name *.mm); do echo --embed-file $f; done) *.c -o metamath.wasm
+COPY patch /work/metamath.patch
+RUN patch -p1 </work/metamath.patch
+RUN $CC *.c -o metamath.wasm
