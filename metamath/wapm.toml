@@ -1,10 +1,11 @@
 [package]
 name = "liftm/metamath"
-version = "0.198.20210807-2"
+version = "0.198.20210807-4"
 description = "A tiny language and checker for theorems and proofs in abstract mathematics"
 license = "GPL-2"
 repository = "https://github.com/jcaesar/wapm-pkg"
 homepage = "http://us.metamath.org/mm.html"
+readme = "README.md"
 
 [[module]]
 name = "metamath"
