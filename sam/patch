@@ -1,0 +1,57 @@
+diff --git a/src/main.c b/src/main.c
+index ea62260..275aafe 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -140,10 +140,6 @@ void OutputSound()
+     SDL_CloseAudio();
+ }
+ 
+-#else
+-
+-void OutputSound() {}
+-
+ #endif
+ 
+ int debug = 0;
+@@ -236,15 +232,6 @@ int main(int argc, char **argv)
+             printf("phonetic input: %s\n", input);
+     } else strncat(input, "\x9b", 255);
+ 
+-#ifdef USESDL
+-    if ( SDL_Init(SDL_INIT_AUDIO) < 0 )
+-    {
+-        printf("Unable to init SDL: %s\n", SDL_GetError());
+-        exit(1);
+-    }
+-    atexit(SDL_Quit);
+-#endif
+-
+     SetInput(input);
+     if (!SAMMain())
+     {
+@@ -253,10 +240,24 @@ int main(int argc, char **argv)
+     }
+ 
+     if (wavfilename != NULL)
++    {
+         WriteWav(wavfilename, GetBuffer(), GetBufferLength()/50);
++    }
+     else
++    {
++#ifdef USESDL
++        if ( SDL_Init(SDL_INIT_AUDIO) < 0 )
++        {
++            printf("Unable to init SDL: %s\n", SDL_GetError());
++            exit(1);
++        }
++        atexit(SDL_Quit);
+         OutputSound();
+-
++#else
++        printf("Compiled without SDL support, provide -wav parameter!\n");
++        exit(1);
++#endif
++    }
+ 
+     return 0;
+ 

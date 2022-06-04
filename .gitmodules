@@ -19,3 +19,6 @@
 [submodule "fd/src"]
 	path = fd/src
 	url = https://github.com/jcaesar/fd
+[submodule "sam/src"]
+	path = sam/src
+	url = https://github.com/RaafatTurki/SAM
