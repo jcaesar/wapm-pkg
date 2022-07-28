@@ -1,0 +1,20 @@
+[package]
+name = "liftm/wasm-custom-section"
+version = "0.1.1"
+description = "Write a custom section in a Wasm module"
+license = "MIT"
+homepage = "https://github.com/xtuc/wasm-custom-section"
+repository = "https://github.com/jcaesar/wapm-pkg"
+readme = "README.md"
+
+[[module]]
+name = "wasm-custom-section"
+source = "wasm-custom-section.wasm"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "wasm-custom-section"
+module = "wasm-custom-section"

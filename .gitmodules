@@ -22,3 +22,6 @@
 [submodule "sam/src"]
 	path = sam/src
 	url = https://github.com/RaafatTurki/SAM
+[submodule "wasm-custom-section/src"]
+	path = wasm-custom-section/src
+	url = https://github.com/xtuc/wasm-custom-section
