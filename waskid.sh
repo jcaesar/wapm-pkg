@@ -3,7 +3,7 @@
 set -euo pipefail
 
 df='
-FROM docker.io/library/ubuntu:18.04
+FROM docker.io/library/debian:bookworm
 RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -yq \
@@ -11,7 +11,6 @@ RUN apt-get update && \
         clang \
         cmake \
         curl \
-        emscripten \
         file \
         git \
         sudo \
@@ -19,8 +18,7 @@ RUN apt-get update && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 ENV PATH=/root/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly --profile minimal --no-modify-path && \
-    rustup target add wasm32-wasi && \
-    rustup target add wasm32-unknown-emscripten
+    rustup target add wasm32-wasi
 WORKDIR /root/src
 '
 

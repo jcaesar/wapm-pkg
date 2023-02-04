@@ -1,0 +1,20 @@
+[package]
+name = "liftm/zola"
+version = "0.0.0-1"
+description = "A fast static site generator in a single binary with everything built-in. "
+license = "MIT"
+repository = "https://github.com/dstaley/zola/releases/tag/v0.0.0"
+homepage = "https://www.getzola.org/"
+readme = "README-wapm.md"
+
+[[module]]
+name = "zola"
+source = "zola"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "zola"
+module = "zola"

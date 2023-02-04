@@ -25,3 +25,7 @@
 [submodule "wasm-custom-section/src"]
 	path = wasm-custom-section/src
 	url = https://github.com/xtuc/wasm-custom-section
+[submodule "zola/src"]
+	path = zola/src
+	url = https://github.com/dstaley/zola/
+	branch = wasm
