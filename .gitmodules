@@ -32,3 +32,7 @@
 [submodule "omekasy-wasi/src"]
 	path = omekasy-wasi/src
 	url = https://github.com/ikanago/omekasy
+[submodule "upx/src"]
+	path = upx/src
+	url = https://github.com/jcaesar/fork-upx/
+	branch = jmp
