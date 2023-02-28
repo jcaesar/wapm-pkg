@@ -29,3 +29,6 @@
 	path = zola/src
 	url = https://github.com/dstaley/zola/
 	branch = wasm
+[submodule "omekasy-wasi/src"]
+	path = omekasy-wasi/src
+	url = https://github.com/ikanago/omekasy
