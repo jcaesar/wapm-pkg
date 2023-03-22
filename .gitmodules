@@ -39,3 +39,6 @@
 [submodule "wordle"]
 	path = wordle/src
 	url = https://github.com/jcaesar/fork-wordle
+[submodule "binaryen/src"]
+	path = binaryen/src
+	url = https://github.com/jcaesar/fork-binaryen/
