@@ -1,0 +1,20 @@
+[package]
+name = "liftm/wordle"
+version = "1.0.1-1"
+description = "Play the popular Wordle word game as a CLI."
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg/tree/HEAD/wordle"
+homepage = "https://github.com/kelsny/wordle"
+readme = "README.md"
+
+[[module]]
+name = "wordle"
+source = "wordle"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "wordle"
+module = "wordle"

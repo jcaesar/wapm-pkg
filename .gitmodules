@@ -36,3 +36,6 @@
 	path = upx/src
 	url = https://github.com/jcaesar/fork-upx/
 	branch = jmp
+[submodule "wordle"]
+	path = wordle/src
+	url = https://github.com/jcaesar/fork-wordle
