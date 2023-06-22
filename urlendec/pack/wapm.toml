@@ -1,0 +1,19 @@
+[package]
+name = "liftm/urlendec"
+version = "0.1.0-1"
+description = "A command-line url encoder/decoder"
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg/tree/HEAD/urlendec"
+homepage = "https://github.com/cobalt-forge/urlendec"
+
+[[module]]
+name = "urlendec"
+source = "urlendec"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "urlendec"
+module = "urlendec"

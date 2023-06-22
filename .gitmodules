@@ -42,3 +42,6 @@
 [submodule "binaryen/src"]
 	path = binaryen/src
 	url = https://github.com/jcaesar/fork-binaryen/
+[submodule "urlendec/src"]
+	path = urlendec/src
+	url = https://github.com/jcaesar/fork-urlendec
