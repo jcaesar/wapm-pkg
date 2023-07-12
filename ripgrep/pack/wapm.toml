@@ -1,0 +1,20 @@
+[package]
+name = "liftm/rg"
+version = "13.0.0-1"
+description = "ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern while respecting your gitignore rules."
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg"
+homepage = "https://github.com/BurntSushi/ripgrep"
+readme = "README.md"
+
+[[module]]
+name = "rg"
+source = "rg"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "rg"
+module = "rg"

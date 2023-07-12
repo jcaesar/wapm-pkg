@@ -45,3 +45,6 @@
 [submodule "urlendec/src"]
 	path = urlendec/src
 	url = https://github.com/jcaesar/fork-urlendec
+[submodule "ripgrep/src"]
+	path = ripgrep/src
+	url = https://github.com/jcaesar/ripgrep
