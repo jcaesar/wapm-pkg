@@ -1,0 +1,19 @@
+[package]
+name = "liftm/ruff"
+version = "0.0.277-1"
+description = "An extremely fast Python linter, written in Rust."
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg/tree/HEAD/ruff"
+homepage = "https://github.com/astral-sh/ruff"
+
+[[module]]
+name = "ruff"
+source = "ruff"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "ruff"
+module = "ruff"

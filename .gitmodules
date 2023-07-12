@@ -48,3 +48,6 @@
 [submodule "ripgrep/src"]
 	path = ripgrep/src
 	url = https://github.com/jcaesar/ripgrep
+[submodule "ruff/src"]
+	path = ruff/src
+	url = https://github.com/astral-sh/ruff
