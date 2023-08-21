@@ -51,3 +51,6 @@
 [submodule "ruff/src"]
 	path = ruff/src
 	url = https://github.com/astral-sh/ruff
+[submodule "rustfilt/src"]
+	path = rustfilt/src
+	url = https://github.com/luser/rustfilt

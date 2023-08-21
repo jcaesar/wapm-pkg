@@ -1,0 +1,19 @@
+[package]
+name = "liftm/rustfilt"
+version = "0.2.1-1"
+description = "Demangle Rust symbol names"
+license = "MIT"
+repository = "https://github.com/jcaesar/wapm-pkg/tree/HEAD/rustfilt"
+homepage = "https://github.com/luser/rustfilt"
+
+[[module]]
+name = "rustfilt"
+source = "rustfilt"
+abi = "wasi"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "rustfilt"
+module = "rustfilt"
